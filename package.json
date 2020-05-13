@@ -1,15 +1,11 @@
 {
   "name": "co-cookie-consent",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com-xansium:cabinetoffice/co-cookie-consent.git"
-  },
-  "author": "",
-  "license": "ISC"
+  "description": "Cabinet Office Cookie Consent Module",
+  "private": true,
+  "main": "cocs/all.js",
+  "license": "MIT",
+  "dependencies": {
+    "govuk-frontend": "^3.6.0"
+  }
 }
