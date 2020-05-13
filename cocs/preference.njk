@@ -1,0 +1,73 @@
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+<div class="govuk-grid-row">
+	<div class="govuk-grid-column-two-thirds">
+		<div id="cocs-preference-saved" class="govuk-!-margin-bottom-8 cocs-hidden">
+			<h2 class="govuk-heading-l">Your cookie settings were saved</h2>
+			<p class="govuk-body">
+				Government services may set additional cookies and, if so, will have their own cookie policy and banner.
+			</p>
+			<a class="govuk-link" href="javascript:window.history.back();">Go back to the page you were looking at</a>
+		</div>
+
+		<h1 class="govuk-heading-xl govuk-!-margin-bottom-2">Preference Centre</h1>
+		<h3 class="govuk-heading-m govuk-!-margin-bottom-8">Cookies on {{ cocs_service_name }} Service.</h3>
+
+		<h2 class="govuk-heading-l">Cookie settings</h2>
+		<p class="govuk-body">
+			We use two types of cookie some of which support the performance and function of this site. You can choose which cookies you are happy for us to use.
+		</p>
+
+		<h2 class="govuk-heading-l">Strictly necessary cookies</h2>
+		<p class="govuk-body">
+			These essential cookies do things like:
+		</p>
+		<ul class="govuk-list govuk-list--bullet">
+			<li class="govuk-!-margin-left-2">remember the notifications you've seen so we do not show them to you again</li>
+			<li class="govuk-!-margin-left-2">remember your progress through a form</li>
+			<li class="govuk-!-margin-left-2">enable core functionality such as website registration, security, network management and accessibility</li>
+		</ul>
+		<p class="govuk-body">
+			They always need to be on however they can be switched off by changing the settings on your browser.
+		</p>
+
+		<h2 class="govuk-heading-l">Cookies that measure website use</h2>
+		<p class="govuk-body">
+			These cookies collect information about
+		</p>
+		<ul class="govuk-list govuk-list--bullet">
+			<li class="govuk-!-margin-left-2">how you use our website - for instance, which pages you go to most. This data is used to make it easier for you to move through the site</li>
+			<li class="govuk-!-margin-left-2">whether you came to our website from an affiliate site</li>
+		</ul>
+		<p class="govuk-body">
+			These cookies provide us with statistics and do not collect information that identifies you. All information these cookies collect is aggregated and therefore anonymous.
+		</p>
+
+		{{ govukRadios({
+			classes: "govuk-radios--inline govuk-!-margin-top-6",
+			idPrefix: "cocs-pref-consent",
+			name: "cocs-pref-consent",
+			items: [
+				{
+					value: "on",
+					text: "on",
+					checked: optedIn
+				},
+				{
+					value: "off",
+					text: "off",
+					checked: optedIn == false
+				}
+			]
+		}) }}
+
+		<button id="cocs-pref-save" class="govuk-button" data-module="govuk-button">
+			Save changes
+		</button>
+
+		<div>
+			<a href={{ cocs_policy_href }} class="govuk-link">Find out more about cookies</a>
+		</div>
+	</div>
+</div>
+

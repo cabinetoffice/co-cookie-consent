@@ -1,0 +1,104 @@
+{% import "cocs/marcos.njk" as cocsMarcos %}
+
+<div class="govuk-grid-row">
+	<div class="govuk-grid-column-two-thirds">
+		<h1 class="govuk-heading-xl">Cookie Policy</h1>
+
+		<h3 class="govuk-heading-m">Details about cookies on the {{ cocs_service_name }} service</h3>
+		<p class="govuk-body">
+			{{ cocs_service_name }} puts small files (known as ‘cookies’) onto your computer to collect information about how you browse the site.
+		</p>
+		<p class="govuk-body">
+			Cookies are small text files containing a string of characters that can be placed on your computer or mobile device that uniquely identify your browser or device. Cookies tell us if your computer or device has visited the site before. They help us understand how the site is being used, help you navigate between pages efficiently, help remember your preferences, and generally improve your browsing experience.
+		</p>
+		<p class="govuk-body">
+			Cookies help us remember what notifications we send you and make our general communications relevant to you and your interests. Changes made to this policy can be identified by the ‘last updated’ date at the bottom of this page. Any changes to how your cookie data is processed will be promptly reflected in this policy and will immediately apply to you and your data. If these changes affect how your data is processed, the {{ cocs_service_name }} team will take reasonable steps to let you know.
+		</p>
+		<p class="govuk-body">
+			Accepting all cookies via our website banner activates those cookie settings that are listed as optional on the <a href={{ cocs_pref_href }} class="govuk-link">settings page</a> (that is, not ‘strictly necessary’). Your activation of all optional cookies lasts for 3 months and the banner will appear again. This gives you the opportunity to regularly re-visit and adjust your decision. Find out more about how to manage cookies, including how to delete and block them, on the <a href="https://meet.google.com/linkredirect?authuser=0&dest=https%3A%2F%2Fico.org.uk%2Fabout-the-ico%2Fnews-and-events%2Fnews-and-blogs%2F2019%2F07%2Fblog-cookies-what-does-good-look-like" class="govuk-link">Information Commission Office’s website</a>. To learn more about how we protect and process your information see our <a href="https://www.gov.uk/government/publications/external-contact-information-privacy-notice/external-contact-information-privacy-notice" class="govuk-link">Privacy Notice</a>.
+		</p>
+
+		<h2 class="govuk-heading-l">Strictly necessary cookies</h2>
+		<p class="govuk-body">
+			These cookies do things like remember your preferences and the choices you make, to personalise your experience of using the {{ cocs_service_name }} service.
+		</p>
+
+		<h3 class="govuk-heading-m">Cookies message</h3>
+		<p class="govuk-body">
+			You may see a banner when you visit the {{ cocs_service_name }} website inviting you to accept cookies or review your settings. We’ll set cookies so that your computer knows you’ve seen it and not to show it again, and also to store your settings.
+		</p>
+
+		{{ cocsMarcos.cookieTable([
+			[
+				"seen_cookie_message",
+				"Lets us know if you've seen our cookie message",
+				"1 year"
+			],
+			[
+				"cookie_policy",
+				"Saves your cookie consent settings",
+				"1 year"
+			]
+		]) }}
+
+                {% block service_specific_policy %}
+			<h3 class="govuk-heading-m">Your progress when submitting your facility time data</h3>
+			<p class="govuk-body">
+				When you enter your data into this service, we’ll set a cookie to remember your progress through the forms. These cookies are deleted once you’ve completed the transaction.
+			</p>
+
+			{{ cocsMarcos.cookieTable([
+				[
+					"co_facility_time",
+					"Set to remember information you’ve entered into a form when submitting your facility time data",
+					"12 hours"
+				]
+			]) }}
+                {% endblock %}
+
+		<h2 class="govuk-heading-l">Measuring website use</h2>
+
+		<h3 class="govuk-heading-m">Cookies that measure website use</h3>
+		<p class="govuk-body">
+			We use Google Analytics software (Universal Analytics) to collect anonymised information about how you use this site. We do this to help make sure the site is meeting the needs of its users and to help us make improvements. We do not allow Google to use or share the data about how you use this site.
+		</p>
+
+		<p class="govuk-body">Google Analytics stores information about:</p>
+
+		<ul class="govuk-list govuk-list--bullet">
+			<li class="govuk-!-margin-left-2">how you got to the site</li>
+			<li class="govuk-!-margin-left-2">the pages you visit on this site and how long you spend on them</li>
+			<li class="govuk-!-margin-left-2">what you click on while you’re visiting the site</li>
+		</ul>
+
+		<p class="govuk-body">Google Analytics sets the following cookies.</p>
+
+		{{ cocsMarcos.cookieTable([
+			[
+				"_ga",
+				"This helps us count how many people visit the " + cocs_service_name + " service by tracking if you've visited before",
+				"2 years"
+			],
+			[
+				"_gid",
+				"This helps us count how many people visit the " + cocs_service_name + " service by tracking if you've visited before",
+				"24 hours"
+			],
+			[
+				"_gat",
+				"Used to manage the rate at which page view requests are made",
+				"10 minutes"
+			]
+		]) }}
+
+		<p class="govuk-body">You can opt out of Google Analytics cookies.</p>
+
+		<h2 class="govuk-heading-l">Change your cookie options</h2>
+
+		<p class="govuk-body">
+			You can <a href={{ cocs_pref_href }} class="govuk-link">change which cookies you’re happy for us to use</a>.
+		</p>
+
+		<p class="govuk-body">Last updated {{ cocs_last_updated }}.</p>
+	</div>
+</div>

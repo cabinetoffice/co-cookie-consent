@@ -1,0 +1,39 @@
+{% from "govuk/components/table/macro.njk" import govukTable %}
+
+{% macro cookieTable(rowStrings) %}
+	{% set rows = [] %}
+	{% for rowString in rowStrings %}
+		{% set columns = [] %}
+		{% set columns = (columns.push({
+			text: rowString[0],
+			classes: "govuk-body-s govuk-!-font-weight-regular"
+		}), columns) %}
+		{% set columns = (columns.push({
+			text: rowString[1],
+			classes: "govuk-body-s"
+		}), columns) %}
+		{% set columns = (columns.push({
+			text: rowString[2],
+			classes: "govuk-body-s"
+		}), columns) %}
+		{% set rows = (rows.push(columns), rows) %}
+	{% endfor %}
+	{{ govukTable({
+		firstCellIsHeader: true,
+		head: [
+			{
+				text: "Name",
+				classes: "govuk-body-s"
+			},
+			{
+				text: "Purpose",
+				classes: "govuk-body-s"
+			},
+			{
+				text: "Expires",
+				classes: "govuk-body-s cocs-policy-expires-column-width"
+			}
+		],
+		rows: rows
+	}) }}
+{% endmacro %}
