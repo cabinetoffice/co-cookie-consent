@@ -4,7 +4,12 @@
   "description": "Cabinet Office Cookie Consent Module",
   "private": true,
   "main": "cocs/all.js",
+  "sass": "cocs/all.scss",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:cabinetoffice/co-cookie-consent.git"
+  },
   "dependencies": {
     "govuk-frontend": "^3.6.0"
   }
