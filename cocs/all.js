@@ -1,6 +1,7 @@
 var COCookieConsent = function () {
-    this.init = function (gaId) {
+    this.init = function (gaId, gaDomain) {
         this._gaId = gaId
+        this._gaDomain = gaDomain
         this._gaSrc = "https://www.googletagmanager.com/gtag/js?id=" + gaId
         this._addListener("cocs-banner-accept", "click", this.onBannerAcceptClicked.bind(this))
         this._addListener("cocs-pref-save", "click", this.onPreferenceSaveClicked.bind(this))
@@ -140,11 +141,16 @@ var COCookieConsent = function () {
         return false
     }
 
+    this.deleteGoogleAnalyticsCookie = function (key) {
+        var expiration = new Date(2000, 1, 1)
+        var cookie = escape(key) + "=;expires=" + expiration + "; path=/; domain=" + this._gaDomain + ";"
+        document.cookie = cookie
+    }
+
     this.clearGoogleAnalyticsCookies = function () {
-        var gtag = "_gat_gtag_" + this._gaId.replace(/-/g, "_")
-        this.createCookie("_ga", "", new Date(2000, 1, 1))
-        this.createCookie("_gid", "", new Date(2000, 1, 1))
-        this.createCookie(gtag, "", new Date(2000, 1, 1))
+        this.deleteGoogleAnalyticsCookie("_ga")
+        this.deleteGoogleAnalyticsCookie("_gid")
+        this.deleteGoogleAnalyticsCookie("_gat_gtag_" + this._gaId.replace(/-/g, "_"))
     }
 
     this.setupGoogleAnalyticsTagIfOptedIn = function () {

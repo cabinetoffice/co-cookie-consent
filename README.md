@@ -19,10 +19,11 @@ This module also setup and dispatch Google Analytics events.
 
       <script src="<YOUR-JAVASCRIPT-FOLDER>/all.js"></script>
       <script>
-          window.COCookieConsent.init(GA_ID)
+          window.COCookieConsent.init(GA_ID, GA_DOMAIN)
       </script>
 
-  - Google Analytics Id is expected as a parameter to the `init()` function.
+  - Google Analytics Id and Domain are expected as parameters to the `init()` function.
+  - Google Analytics Id is needed to initialse Google Analytics where Google Analytics Domain is needed for removal of the cookies.
 
 ## UI Components
 
