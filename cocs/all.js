@@ -58,6 +58,7 @@ var COCookieConsent = function () {
                 this.setupGoogleAnalyticsTagIfOptedIn()
             }
             if (prefConsetNo.checked) {
+                this.clearGoogleAnalyticsCookies()
                 this.storeCookiePolicy(true, true, false)
             }
             this.storeSeenCookieMessage(true)
@@ -97,9 +98,11 @@ var COCookieConsent = function () {
     }
 
     this.storeSeenCookieMessage = function (seen) {
+        var threeMonths = new Date();
+        threeMonths.setMonth(threeMonths.getMonth() + 3);
         this.createCookie("seen_cookie_message", JSON.stringify({
             "seen": seen
-        }))
+        }), threeMonths.getTime())
     }
 
     this.deleteCookiePolicy = function () {
@@ -135,6 +138,13 @@ var COCookieConsent = function () {
             }
         }
         return false
+    }
+
+    this.clearGoogleAnalyticsCookies = function () {
+        var gtag = "_gat_gtag_" + this._gaId.replace(/-/g, "_")
+        this.createCookie("_ga", "", new Date(2000, 1, 1))
+        this.createCookie("_gid", "", new Date(2000, 1, 1))
+        this.createCookie(gtag, "", new Date(2000, 1, 1))
     }
 
     this.setupGoogleAnalyticsTagIfOptedIn = function () {
