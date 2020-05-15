@@ -35,6 +35,8 @@ This module also setup and dispatch Google Analytics events.
 
 - `cocs_pref_href` - href link to the preference centre page.
 
+- `cocs_privacy_href` - href link to the privacy notice page.
+
 - `cocs_last_updated` - Used at the end of cookie policy page as the last updated date.
 
 ### Cookie Banner Usage
