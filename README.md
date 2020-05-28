@@ -13,7 +13,7 @@ This module also setup and dispatch Google Analytics events.
 
 - Import the Sass source file to include `co-cookie-consent` styling:
 
-      @import "node_modules/co-cookie-consent/cocs/all";
+      @import "node_modules/co-cookie-consent/cocc/all";
 
 - Source the Javascript code `js.all` using a script tag. Alternatively, compile the source file if the target project already has `browserify` for example setup.
 
@@ -29,38 +29,38 @@ This module also setup and dispatch Google Analytics events.
 
 `co-cookie-consent` offers 3 components including `Cookie Banner`, `Preference Centre` and `Cookie Policy`. All of them are written in [Nunjucks] and can be customised by the following variables:
 
-- `cocs_service_name` - Name of the service.
+- `cocc_service_name` - Name of the service.
 
-- `cocs_policy_href` - href link to the cookie policy page.
+- `cocc_policy_href` - href link to the cookie policy page.
 
-- `cocs_pref_href` - href link to the preference centre page.
+- `cocc_pref_href` - href link to the preference centre page.
 
-- `cocs_privacy_href` - href link to the privacy notice page.
+- `cocc_privacy_href` - href link to the privacy notice page.
 
-- `cocs_last_updated` - Used at the end of cookie policy page as the last updated date.
+- `cocc_last_updated` - Used at the end of cookie policy page as the last updated date.
 
 ### Cookie Banner Usage
 
-    {% include "cocs/banner.njk" %}
+    {% include "cocc/banner.njk" %}
 
 ### Preference Centre Usage
 
-    {% include "cocs/preference.njk" %}
+    {% include "cocc/preference.njk" %}
 
 ### Cookie Policy Usage
 
-    {% include "cocs/policy.njk" %}
+    {% include "cocc/policy.njk" %}
 
 A section in the Cookie Policy is service specific and can be overridden by extending `co-cookie-consent/policy.njk` and defining the `service_specific_policy` block as follows:
 
     {% extends "co-cookie-consent/policy.njk" %}
-    {% import "marcos.njk" as cocsMarcos %}
+    {% import "marcos.njk" as coccMarcos %}
 
     {% block service_specific_policy %}
       <p class="govuk-body">
         Service specific policy description
       </p>
-	    {{ cocsMarcos.cookieTable([
+	    {{ coccMarcos.cookieTable([
 		    [
 			    "Cookie name",
 			    "Purpose of cookie",

@@ -1,0 +1,26 @@
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+<div id="cocc-banner">
+	<div class="govuk-width-container">
+		<div id="cocc-banner-unconfirm" class="govuk-!-padding-top-4">
+			<p class="govuk-body">{{ cocc_service_name }} service uses cookies to make the site work better for you. <a href={{ cocc_policy_href }} class="govuk-link">Some of these cookies are essential to how the site functions and others are optional.</a> Optional cookies help us remember your settings, measure your use of the site and personalise how we communicate with you. Any data collected is anonymised and we do not set optional cookies unless you consent.</p>
+
+			<button id="cocc-banner-accept" class="govuk-button govuk-button--secondary govuk-!-margin-right-2 govuk-!-margin-bottom-4" data-module="govuk-button">
+				Accept all cookies
+			</button>
+
+			{{ govukButton({
+				text: "Set cookie preferences",
+				classes: "govuk-button--secondary govuk-!-margin-bottom-4",
+				href: cocc_pref_href
+			}) }}
+		</div>
+		<div id="cocc-banner-confirm" class="govuk-!-padding-top-4 cocc-hidden">
+			<p class="govuk-body">You've accepted all cookies. You can <a href={{ cocc_pref_href }} class="govuk-link">change your cookie settings</a> at any time.</p>
+
+			<button id="cocc-banner-hide" class="govuk-button govuk-!-margin-bottom-4" data-module="govuk-button">
+				Hide Cookie Message
+			</button>
+		</div>
+	</div>
+</div>

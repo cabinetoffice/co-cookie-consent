@@ -3,38 +3,45 @@ var COCookieConsent = function () {
         this._gaId = gaId
         this._gaDomain = gaDomain
         this._gaSrc = "https://www.googletagmanager.com/gtag/js?id=" + gaId
-        this._addListener("cocs-banner-accept", "click", this.onBannerAcceptClicked.bind(this))
-        this._addListener("cocs-pref-save", "click", this.onPreferenceSaveClicked.bind(this))
+        this.addListener("cocc-banner-accept", "click", this.onBannerAcceptClicked.bind(this))
+        this.addListener("cocc-pref-save", "click", this.onPreferenceSaveClicked.bind(this))
         this.setupGoogleAnalyticsTagIfOptedIn()
     }
 
     // Common
-    this._addListener = function (name, event, callback) {
+    this.addListener = function (name, event, callback) {
         var element = document.getElementById(name)
         if (element) {
             element.addEventListener("click", callback, false)
         }
     }
 
-    this._show = function (name) {
+    this.show = function (name) {
         var element = document.getElementById(name)
         if (element) {
-            element.classList.remove("cocs-hidden")
+            element.classList.remove("cocc-hidden")
         }
     }
 
-    this._hide = function (name) {
+    this.hide = function (name) {
         var element = document.getElementById(name)
         if (element) {
-            element.classList.add("cocs-hidden")
+            element.classList.add("cocc-hidden")
+        }
+    }
+
+    this.focus = function (name) {
+        var element = document.getElementById(name)
+        if (element) {
+            element.focus()
         }
     }
 
     // Banner
     this.onBannerAcceptClicked = function () {
-        this._hide("cocs-banner-unconfirm")
-        this._show("cocs-banner-confirm")
-        this._addListener("cocs-banner-hide", "click", this.onBannerHideClicked.bind(this))
+        this.hide("cocc-banner-unconfirm")
+        this.show("cocc-banner-confirm")
+        this.addListener("cocc-banner-hide", "click", this.onBannerHideClicked.bind(this))
 
         this.storeCookiePolicy(true, true, true)
         this.storeSeenCookieMessage(true)
@@ -42,17 +49,17 @@ var COCookieConsent = function () {
     }
 
     this.onBannerHideClicked = function () {
-        this._hide("cocs-banner")
+        this.hide("cocc-banner")
     }
 
     // Preference
     this.onPreferenceSaveClicked = function () {
-        var prefConsetYes = document.getElementById("cocs-pref-consent")
-        var prefConsetNo = document.getElementById("cocs-pref-consent-2")
+        var prefConsetYes = document.getElementById("cocc-pref-consent")
+        var prefConsetNo = document.getElementById("cocc-pref-consent-2")
         if (prefConsetYes && prefConsetNo) {
-            this._hide("cocs-banner")
-            this._show("cocs-preference-saved")
-            window.scrollTo(0, 0)
+            this.hide("cocc-banner")
+            this.show("cocc-preference-saved")
+            this.focus("cocc-preference-saved-heading")
 
             if (prefConsetYes.checked) {
                 this.storeCookiePolicy(true, true, true)
@@ -128,7 +135,9 @@ var COCookieConsent = function () {
 
     // Google Analytics
     this.gtag = function () {
-        dataLayer.push(arguments)
+        if (dataLayer) {
+            dataLayer.push(arguments)
+        }
     }
 
     this.isGoogleAnalyticsLoaded = function () {

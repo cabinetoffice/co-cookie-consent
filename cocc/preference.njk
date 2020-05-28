@@ -2,13 +2,13 @@
 
 <div class="govuk-grid-row">
 	<div class="govuk-grid-column-full">
-		<div id="cocs-preference-saved" class="govuk-!-margin-bottom-8 cocs-hidden">
-			<h2 class="govuk-heading-l">Your cookie settings were saved</h2>
+		<div id="cocc-preference-saved" class="govuk-!-margin-bottom-8 cocc-hidden">
+			<p id="cocc-preference-saved-heading" class="govuk-heading-l" tabindex="-1">Your cookie settings were saved</p>
 			<a class="govuk-link" href="javascript:window.history.back();">Go back to the page you were looking at</a>
 		</div>
 
 		<h1 class="govuk-heading-xl govuk-!-margin-bottom-2">Preferences</h1>
-		<h3 class="govuk-heading-m govuk-!-margin-bottom-8">Cookies on {{ cocs_service_name }} Service.</h3>
+		<p class="govuk-heading-m govuk-!-margin-bottom-8">Cookies on {{ cocc_service_name }} Service</p>
 
 		<h2 class="govuk-heading-l">Cookie settings</h2>
 		<p class="govuk-body">
@@ -42,28 +42,34 @@
 
 		{{ govukRadios({
 			classes: "govuk-radios--inline govuk-!-margin-top-6",
-			idPrefix: "cocs-pref-consent",
-			name: "cocs-pref-consent",
+			idPrefix: "cocc-pref-consent",
+			name: "cocc-pref-consent",
 			items: [
 				{
 					value: "on",
 					text: "on",
+					attributes: {
+						"aria-label": "Cookie ok"
+					},
 					checked: optedIn
 				},
 				{
 					value: "off",
 					text: "off",
+					attributes: {
+						"aria-label": "Cookie off"
+					},
 					checked: optedIn == false
 				}
 			]
 		}) }}
 
-		<button id="cocs-pref-save" class="govuk-button" data-module="govuk-button">
+		<button id="cocc-pref-save" class="govuk-button" data-module="govuk-button">
 			Save changes
 		</button>
 
 		<div>
-			<a href={{ cocs_policy_href }} class="govuk-link">Find out more about cookies</a>
+			<a href={{ cocc_policy_href }} class="govuk-link">Find out more about cookies</a>
 		</div>
 	</div>
 </div>

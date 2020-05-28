@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Cabinet Office Cookie Consent Module",
   "private": true,
-  "main": "cocs/all.js",
-  "sass": "cocs/all.scss",
+  "main": "cocc/all.js",
+  "sass": "cocc/all.scss",
   "license": "MIT",
   "repository": {
     "type": "git",
