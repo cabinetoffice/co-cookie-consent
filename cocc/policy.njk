@@ -4,7 +4,7 @@
 	<div class="govuk-grid-column-full">
 		<h1 class="govuk-heading-xl">Cookies</h1>
 
-		<h3 class="govuk-heading-m">Details about cookies on the {{ cocc_service_name }} service</h3>
+		<p class="govuk-heading-m">Details about cookies on {{ cocc_service_name }}</p>
 		<p class="govuk-body">
 			{{ cocc_service_name }} puts small files (known as ‘cookies’) onto your computer to collect information about how you browse the site.
 		</p>
@@ -41,7 +41,7 @@
 			]
 		]) }}
 
-                {% block service_specific_policy %}
+		{% block service_specific_policy %}
 			<h3 class="govuk-heading-m">Your progress when submitting your facility time data</h3>
 			<p class="govuk-body">
 				When you enter your data into this service, we’ll set a cookie to remember your progress through the forms. These cookies are deleted once you’ve completed the transaction.
@@ -54,7 +54,7 @@
 					"12 hours"
 				]
 			]) }}
-                {% endblock %}
+		{% endblock %}
 
 		<h2 class="govuk-heading-l">Measuring website use</h2>
 
@@ -90,8 +90,6 @@
 				"10 minutes"
 			]
 		]) }}
-
-		<p class="govuk-body">You can opt out of Google Analytics cookies.</p>
 
 		<h2 class="govuk-heading-l">Change your cookie options</h2>
 
