@@ -53,8 +53,8 @@ This module also setup and dispatch Google Analytics events.
 
 A section in the Cookie Policy is service specific and can be overridden by extending `co-cookie-consent/policy.njk` and defining the `service_specific_policy` block as follows:
 
-    {% extends "co-cookie-consent/policy.njk" %}
-    {% import "marcos.njk" as coccMarcos %}
+    {% extends "cocc/policy.njk" %}
+    {% import "cocc/marcos.njk" as coccMarcos %}
 
     {% block service_specific_policy %}
       <p class="govuk-body">
