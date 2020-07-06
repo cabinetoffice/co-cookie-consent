@@ -15,6 +15,8 @@ This module also setup and dispatch Google Analytics events.
 
       @import "node_modules/co-cookie-consent/cocc/all";
 
+- Access client side cookie using [Cookie Parser] for example, this is required to retrieve user saved settings. See [Cookie Banner Usage](#Cookie-Banner-Usage) and [Preference Centre Usage](#Preference-Centre-Usage) for more detail.
+
 - Source the Javascript code `js.all` using a script tag. Alternatively, compile the source file if the target project already has `browserify` for example setup.
 
       <script src="<YOUR-JAVASCRIPT-FOLDER>/all.js"></script>
@@ -39,13 +41,40 @@ This module also setup and dispatch Google Analytics events.
 
 - `cocc_last_updated` - Used at the end of cookie policy page as the last updated date.
 
+**Note**: declaration of `getCookieByName()` used in the following subsection can be found in [Appendix](#Get-Cookie-By-Name).
+
 ### Cookie Banner Usage
 
-    {% include "cocc/banner.njk" %}
+The banner template shall be wrapped around by a variable based on the `seen` boolean filed in the `seen_cookie_message` cookie. This is to ensure the banner will be not be rendered again after user cookie preference is made:
+
+    {% if not coccSeenCookie %}
+      {% include "cocc/banner.njk" %}
+    {% endif %}
+
+The `coccSeenCookie` variable shall be passed by the pages that include the banner template, for example:
+
+    module.exports = function(req, res) {
+      var seenCookieMsg = getCookieByName(req, 'seen_cookie_message')
+      var coccSeenCookie = seenCookieMsg ? seenCookieMsg.seen : false
+
+      res.render('app/main/index', { coccSeenCookie })
+    }
 
 ### Preference Centre Usage
 
     {% include "cocc/preference.njk" %}
+
+The preference template expects an `coccOptedIn` variable to determine which is the selected radio button. This variable shall be set based on the `usage` boolean filed in the `cookie_policy` cookie, for example:
+
+    module.exports = function(req, res) {
+      var seenCookieMsg = getCookieByName(req, 'seen_cookie_message')
+      var coccSeenCookie = seenCookieMsg ? seenCookieMsg.seen : false
+
+      var cookiePolicy = getCookieByName(req, 'cookie_policy')
+      var coccOptedIn = cookiePolicy ? cookiePolicy.usage : false
+
+      res.render('app/cookies/preference/index', { coccSeenCookie, coccOptedIn })
+    }
 
 ### Cookie Policy Usage
 
@@ -69,7 +98,26 @@ A section in the Cookie Policy is service specific and can be overridden by exte
 	    ]) }}
     {% endblock %}
 
+## Appendix
+
+### Get Cookie By Name
+
+    var getCookieByName = function (req, name) {
+      var cookies = req.cookies
+      var cookie
+
+      if (cookies && cookies[name]) {
+        try {
+          cookie = JSON.parse(cookies[name])
+        } catch(e) {
+          console.error('Failed to parse cookie:', name, '.', e)
+        }
+      }
+      return cookie
+    }
+
 [govuk-frontend]: https://github.com/alphagov/govuk-frontend
 [GOV.UK Design System]: https://design-system.service.gov.uk/
 [GOV.UK Frontend Instructions]: https://frontend.design-system.service.gov.uk/get-started/#get-started
+[Cookie Parser]: https://www.npmjs.com/package/cookie-parser
 [Nunjucks]: https://mozilla.github.io/nunjucks/
